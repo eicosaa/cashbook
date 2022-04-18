@@ -45,7 +45,7 @@ public class CashbookDao {
 		try {
 			// -데이터베이스 드라이버 연결
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:306/cashbook", "root", "java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "java1234");
 			
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, y);
