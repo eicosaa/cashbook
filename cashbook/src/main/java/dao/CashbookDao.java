@@ -24,9 +24,12 @@ public class CashbookDao {
 				,DAY(cash_date) day
 				,kind
 				,cash
+				,LEFT(memo, 5) memo
 			FROM cashbook
 			WHERE YEAR(cash_date) = ? AND MONTH(cash_date) = ?
-			ORDER BY DAY(cash_date) ASC;
+			ORDER BY DAY(cash_date) ASC, kind ASC;
+			
+			-kind ASC로 지출보다 수입이 먼저 나오도록
 		*/
 		
 		// -데이터베이스 자원 준비
@@ -38,9 +41,10 @@ public class CashbookDao {
 				+ "				,DAY(cash_date) day"
 				+ "				,kind"
 				+ "				,cash"
+				+ "				,LEFT(memo, 5) memo"
 				+ "			FROM cashbook"
 				+ "			WHERE YEAR(cash_date) = ? AND MONTH(cash_date) = ?"
-				+ "			ORDER BY DAY(cash_date) ASC";
+				+ "			ORDER BY DAY(cash_date) ASC, kind ASC";
 		
 		try {
 			// -데이터베이스 드라이버 연결
@@ -57,6 +61,7 @@ public class CashbookDao {
 				map.put("day", rs.getInt("day"));
 				map.put("kind", rs.getString("kind"));
 				map.put("cash", rs.getInt("cash"));
+				map.put("memo", rs.getString("memo"));
 				list.add(map);
 			}
 			

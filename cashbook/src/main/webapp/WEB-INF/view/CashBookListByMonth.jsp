@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.util.Map"%>
-<%@ page import = "java.util.List"%>
+<%@ page import = "java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>CashBookListByMonth</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	<style>
+		table.table.table-bordered td:HOVER {
+		    background: #e7e7e7;
+		}
+	</style>
 </head>
 <body>
 	<%
@@ -50,7 +54,20 @@
 	 -->
 	 
 	 <!-- -달력 -->
-	 <table class="table table-bordered text-center table-hover">
+	 <table class="table table-bordered">
+	 	<thead>
+	 		<tr class = "text-center">
+	 			<th>일</th>
+	 			<th>월</th>
+	 			<th>화</th>
+	 			<th>수</th>
+	 			<th>목</th>
+	 			<th>금</th>
+	 			<th>토</th>
+	 		</tr>
+	 	</thead>
+	 	
+	 	<tbody>
 	 	<tr>
 	 		<!-- 
 	 			[(i - startBlank) > 0] : 1일 이전의 숫자들이 나오지 않도록 (ex) -2, -1, 0, 1)
@@ -59,9 +76,34 @@
 	 		<%
 	 			for(int i = 1; i <= totalTd; i += 1) { 
 	 				if((i - startBlank) > 0 && (i - startBlank) <= endDay) { // -존재하지 않는 날은 나오지 않도록
+	 					String c = ""; // -일요일, 토요일 색깔 바꾸기 위한 변수
+	 					if(i % 7 == 0) {
+							c = "text-primary";
+	 					} else if(i % 7 == 1) {
+							c = "text-danger";
+	 					}
 	 		%>
-	 					<td><%= i - startBlank %></td>
-	 		<%
+	 					<td class = "<%= c %>">
+	 						<%= i - startBlank %>
+	 						<a href = "<%= request.getContextPath() %>/InsertCashBookController?y=<%= y %>&m=<%= m %>&d=<%= i - startBlank %>" class = "btn btn-outline-dark btn-sm">입력</a>
+	 						<div>
+	 							<%
+	 								// 해당 날짜의 cashbook 목록 출력
+	 								for(Map map : list) {
+	 									if((Integer)map.get("day") == (i - startBlank)) {
+	 							%>
+	 										<div>
+		 										[<%= map.get("kind") %>] 
+		 										<%= map.get("cash") %>원
+		 										<%= map.get("memo") %>...
+	 										</div>
+	 							<%
+	 									}
+	 								}
+	 							%>
+	 						</div>
+	 					</td>
+		 	<%
 	 				} else {
 	 		%>
 	 					<td>&nbsp;</td>
@@ -75,6 +117,8 @@
 	 			}
 	 		%>
 	 	</tr>
+	 	</tbody>
 	 </table>
+</div>
 </body>
 </html>
