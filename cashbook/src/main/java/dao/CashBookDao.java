@@ -15,7 +15,7 @@ import vo.CashBook;
 
 public class CashBookDao {
 	
-	public void insertCashbook(CashBook cashbook, List<String> hashtag) {
+	public void insertCashBook(CashBook cashbook, List<String> hashtag) {
 		// -데이터베이스 자원 준비
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -72,7 +72,7 @@ public class CashBookDao {
 		}
 	}
 	
-	public List<Map<String, Object>> selectCashbookListByMonth(int y, int m) { // -y -> year, m -> month
+	public List<Map<String, Object>> selectCashBookListByMonth(int y, int m) { // -y -> year, m -> month
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		
 		/*

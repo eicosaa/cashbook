@@ -10,7 +10,7 @@
 <div class="container">
 <br>
 	<h2>
-		<div class="container p-3 my-3 bg-secondary text-white text-center">insertCashBook</div>
+		<div class="container p-3 my-3 bg-secondary text-white text-center">InsertCashBook</div>
 	</h2>
 	<form method = "post" action = "<%= request.getContextPath() %>/InsertCashBookController">
 		<table class = "table table-bordered">

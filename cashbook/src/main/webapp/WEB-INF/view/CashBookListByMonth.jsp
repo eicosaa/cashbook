@@ -24,7 +24,7 @@
 		int totalTd = (Integer)request.getAttribute("totalTd");
 		
 		System.out.println("[CashBookListByMonth.jsp] list.size() : " + list.size());
-		System.out.println("[CashBookListByMonth.jsp] list.size() : " + y);
+		System.out.println("[CashBookListByMonth.jsp] y : " + y);
 		System.out.println("[CashBookListByMonth.jsp] m : " + m);
 		
 		System.out.println("[CashBookListByMonth.jsp] startBlank : " + startBlank);
