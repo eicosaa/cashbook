@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 
-import vo.Cashbook;
+import vo.CashBook;
 
-public class CashbookDao {
+public class CashBookDao {
 	
-	public void insertCashbook(Cashbook cashbook, List<String> hashtag) {
+	public void insertCashbook(CashBook cashbook, List<String> hashtag) {
 		// -데이터베이스 자원 준비
 		Connection conn = null;
 		PreparedStatement stmt = null;

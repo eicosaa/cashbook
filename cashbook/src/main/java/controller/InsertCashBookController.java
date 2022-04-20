@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CashbookDao;
-import vo.Cashbook;
+import dao.CashBookDao;
+import vo.CashBook;
 
 @WebServlet("/InsertCashBookController")
 public class InsertCashBookController extends HttpServlet {
@@ -39,7 +39,7 @@ public class InsertCashBookController extends HttpServlet {
 		System.out.println("[InsertCashBookController.doPost()] cash : " + cash);
 		System.out.println("[InsertCashBookController.doPost()] memo : " + memo);
 		
-		Cashbook cashbook = new Cashbook();
+		CashBook cashbook = new CashBook();
 		cashbook.setCashDate(cashDate);
 		cashbook.setKind(kind);
 		cashbook.setCash(cash);
@@ -62,7 +62,7 @@ public class InsertCashBookController extends HttpServlet {
 			System.out.println("[InsertCashBookController.doPost()] h : " + h);
 		}
 		
-		CashbookDao cashbookDao = new CashbookDao();
+		CashBookDao cashbookDao = new CashBookDao();
 		cashbookDao.insertCashbook(cashbook, hashtag);
 		
 		response.sendRedirect(request.getContextPath() + "/CashBookListByMonthController");

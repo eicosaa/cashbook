@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CashbookDao;
+import dao.CashBookDao;
 
 @WebServlet("/CashBookListByMonthController")
 public class CashBookListByMonthController extends HttpServlet {
@@ -71,7 +71,7 @@ public class CashBookListByMonthController extends HttpServlet {
 		
 		
 		// 2) 모델값(월별 가계부 리스트)을 반환하는 비즈니스 로직(모델) 호출
-		CashbookDao cashbookDao = new CashbookDao();
+		CashBookDao cashbookDao = new CashBookDao();
 		List<Map<String, Object>> list = cashbookDao.selectCashbookListByMonth(y, m);
 		
 		// 달력 출력에 필요한 모델값(1), 2), 3), 4)) + 데이터베이스에서 반환된 모델값(list, y출력년도, m출력월) + 오늘 날짜(today)
