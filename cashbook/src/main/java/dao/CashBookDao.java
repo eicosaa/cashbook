@@ -15,6 +15,7 @@ import vo.CashBook;
 
 public class CashBookDao {
 	
+	// -입력
 	public void insertCashBook(CashBook cashbook, List<String> hashtag) {
 		// -데이터베이스 자원 준비
 		Connection conn = null;
@@ -72,6 +73,61 @@ public class CashBookDao {
 		}
 	}
 	
+	// -상세보기
+	public CashBook selectCashBookOne(int cashbookNo) {
+		CashBook cashbook = new CashBook();
+		
+		// -데이터베이스 자원 준비
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT"
+				+ "				cashbook_no cashbookNo"
+				+ "				,cash_date cashDate"
+				+ "				,kind"
+				+ "				,cash"
+				+ "				,memo"
+				+ "				,update_date updateDate"
+				+ "				,create_date createDate"
+				+ "			FROM cashbook"
+				+ "			WHERE cashbook_no = ?";
+		
+		try {
+			// -데이터베이스 드라이버 연결
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "java1234");
+			
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cashbookNo);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				cashbook.setCashbookNo(rs.getInt("cashbookNo"));
+				cashbook.setCashDate(rs.getString("cashDate"));
+				cashbook.setKind(rs.getString("kind"));
+				cashbook.setCash(rs.getInt("cash"));
+				cashbook.setMemo(rs.getString("memo"));
+				cashbook.setUpdateDate(rs.getString("updateDate"));
+				cashbook.setCreatDate(rs.getString("createDate"));
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// -데이터베이스 자원 반환
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cashbook;
+	}
+	
+	// -월별 가계부 리스트 
 	public List<Map<String, Object>> selectCashBookListByMonth(int y, int m) { // -y -> year, m -> month
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		

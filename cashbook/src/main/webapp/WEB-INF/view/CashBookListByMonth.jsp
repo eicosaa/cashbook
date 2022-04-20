@@ -93,7 +93,7 @@
 	 									if((Integer)map.get("day") == (i - startBlank)) {
 	 							%>
 	 										<div>
-	 											<a href = "<%= request.getContextPath() %>/CashBookOneController?cashbookNo=<%= map.get("cashbookNo") %>">
+	 											<a href = "<%= request.getContextPath() %>/CashBookOneController?cashbookNo=<%= map.get("cashbookNo") %>&y=<%= y %>&m=<%= m %>&d=<%= i - startBlank %>">
 			 										[<%= map.get("kind") %>] 
 			 										<%= map.get("cash") %>원
 			 										<%= map.get("memo") %>...
