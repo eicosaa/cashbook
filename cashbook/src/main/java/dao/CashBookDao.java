@@ -73,6 +73,61 @@ public class CashBookDao {
 		}
 	}
 	
+	// -삭제
+	public void deleteCashBook(int cashbookNo) {
+		// -데이터베이스 자원 준비
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int row = 0;
+		
+		try {
+			// -데이터베이스 드라이버 연결
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "java1234");
+			conn.setAutoCommit(false); // 자동 커밋 해제
+			
+			// -(cashbook 테이블과 fk키 관계 때문에 hashtag 테이블의 데이터가 먼저 삭제 되어야 cashbook의 데이터가 삭제된다.)
+			// -hashtag 테이블 데이터를 삭제하는 코드
+			String sql = "DELETE FROM hashtag WHERE cashbook_no = ?";
+			
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cashbookNo);
+			stmt.executeUpdate();	
+			
+			// -cashbook 테이블 데이터를 삭제하는 코드
+			PreparedStatement stmt2 = null;
+			String sql2 = "DELETE FROM cashbook WHERE cashbook_no = ?";
+
+			stmt2 = conn.prepareStatement(sql2);
+			stmt2.setInt(1, cashbookNo);
+			row = stmt2.executeUpdate();
+			
+			conn.commit(); // -커밋
+		} catch (Exception e) {
+			try { 
+				conn.rollback(); // -예외가 발생하면 rollback
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} 
+			e.printStackTrace();
+		} finally {
+			try {
+				// -데이터베이스 자원 반환
+				conn.close();
+				
+				// -디버깅 코드
+				if(row == 1) {
+					System.out.println("[deleteCashBook] hashtag 삭제 성공");
+				} else {
+					System.out.println("[deleteCashBook] hashtag 삭제 실패");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	// -상세보기
 	public CashBook selectCashBookOne(int cashbookNo) {
 		CashBook cashbook = new CashBook();
