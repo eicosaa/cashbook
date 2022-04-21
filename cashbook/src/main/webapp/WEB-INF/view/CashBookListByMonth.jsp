@@ -44,6 +44,7 @@
 	<div>
 		<a href = "<%= request.getContextPath() %>/CashBookListByMonthController?y=<%= y %>&m=<%= m - 1 %>" class = "btn btn-outline-secondary">이전 달</a>
 		<a href = "<%= request.getContextPath() %>/CashBookListByMonthController?y=<%= y %>&m=<%= m + 1 %>" class = "btn btn-outline-secondary">다음 달</a>
+		<a href = "<%= request.getContextPath() %>/TagController" class = "btn btn-outline-dark btn-sm">Tag</a>
 	</div>
 	<!-- 
 		1) 이번 날 1일의 요일 firstDay

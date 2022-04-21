@@ -163,8 +163,9 @@ public class HashtagDao {
 	}
 	
 	// -날짜별 검색 목록
-	public List<Map<String, Object>> selectSearchDateList(String cashDate) {
-		System.out.println("[HashtagDao.selectSearchDateList] cashDate : " + cashDate);
+	public List<Map<String, Object>> selectSearchDateList(String beginCashDate, String lastCashDate) {
+		System.out.println("[HashtagDao.selectSearchDateList] beginCashDate : " + beginCashDate);
+		System.out.println("[HashtagDao.selectSearchDateList] lastCashDate : " + lastCashDate);
 		
 		List<Map<String, Object>> list = new ArrayList<>();
 		
@@ -181,10 +182,11 @@ public class HashtagDao {
 			String sql = "SELECT c.cashbook_no, c.cash_date, c.kind, c.memo, c.update_date, c.create_date, t.tag"
 					+ " FROM hashtag t INNER JOIN cashbook c"
 					+ " ON t.cashbook_no = c.cashbook_no"
-					+ " WHERE c.cash_date = ?";
+					+ " WHERE c.cash_date BETWEEN ? AND ?";
 
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, cashDate);
+			stmt.setString(1, beginCashDate);
+			stmt.setString(2, lastCashDate);
 				
 			
 			rs = stmt.executeQuery();

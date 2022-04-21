@@ -17,13 +17,17 @@
 		<div class="container p-3 my-3 bg-secondary text-white text-center">tag rank</div>
 	</h2>
 	<div> 수입 / 지출별 검색 </div>
+	
 	<a href = "<%= request.getContextPath() %>/SearchIncomeExpendListController?kind=<%= "수입" %>" class = "btn btn-outline-dark btn-sm">수입</a>
 	<a href = "<%= request.getContextPath() %>/SearchIncomeExpendListController?kind=<%= "지출" %>" class = "btn btn-outline-dark btn-sm">지출</a>
-	<div> 날짜별 검색 </div>
-	<form method = "get" action = "<%= request.getContextPath() %>/SearchDateListController">
-		<input type = "date" name = "cashDate" class = "form-control">
-		<button type = "submit" class = "btn btn-outline-dark btn-sm">검색</button>
+
+	<form method = "get" action = "<%= request.getContextPath() %>/SearchDateListController" class = "row g-3">
+		날짜별 검색
+		<div class="col-auto"><input type = "date" name = "beginCashDate" class = "form-control input-sm"></div> ~
+		<div class="col-auto"><input type = "date" name = "lastCashDate" class = "form-control input-sm"></div>
+		<div class="col-auto"><button type = "submit" class = "btn btn-outline-dark btn-sm">검색</button></div>
 	</form>
+	
 	<table class = "table table-bordered">
 		<tr>
 			<th>rank</th>
