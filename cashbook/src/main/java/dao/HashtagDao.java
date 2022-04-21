@@ -59,4 +59,58 @@ public class HashtagDao {
 		}
 		return list;
 	}
+	
+	// -수입 / 지출별 검색 목록
+	public List<Map<String, Object>> selectSearchIncomeExpendList(String kind) {
+		System.out.println("[HashtagDao.selectSearchIncomeExpendList] kind : " + kind);
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		
+		// -데이터베이스 자원 준비
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			// -데이터베이스 드라이버 연결
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "java1234");
+
+			String sql = "SELECT kind, t.tag, t.cnt, RANK() over(ORDER BY t.cnt DESC) rank"
+					+ " FROM"
+					+ " (SELECT c.kind kind, tag, COUNT(*) cnt"
+					+ " FROM hashtag t INNER JOIN cashbook c"
+					+ " ON t.cashbook_no = c.cashbook_no"
+					+ " WHERE c.kind = ?"
+					+ " GROUP BY t.tag) t";
+
+			stmt = conn.prepareStatement(sql);
+			if(kind == "수입") {
+				stmt.setString(1, "수입");
+			} else {
+				stmt.setString(1, "지출");
+			}
+			
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("kind", rs.getString("kind"));
+				map.put("tag", rs.getString("t.tag"));
+				map.put("cnt", rs.getInt("t.cnt"));
+				map.put("rank", rs.getInt("rank"));
+				list.add(map);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// -데이터베이스 자원 반환
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }
