@@ -34,6 +34,9 @@
 	%>
 <div class="container">
 <br>
+	<div>
+		<a href = "<%= request.getContextPath() %>/TagController">tags</a>
+	</div>
 	<h2>
 		<div class="container p-3 my-3 bg-secondary text-white text-center"><%= y %>년 <%= m %>월</div>
 	</h2>
