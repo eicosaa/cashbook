@@ -17,7 +17,7 @@ public class SearchIncomeExpendListController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// -1) 수입 지출 검색 리스트 요구분석
+		// -1) 수입 지출 검색 리스트 요청 분석
 		String kind = "";
 		if(request.getParameter("kind") != null) {
 			kind = request.getParameter("kind");

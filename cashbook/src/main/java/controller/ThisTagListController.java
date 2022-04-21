@@ -16,7 +16,7 @@ import dao.HashtagDao;
 public class ThisTagListController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// -1) 해당 태그의 리스트 요구분석
+		// -1) 해당 태그의 리스트 요청 분석
 		String tag = "";
 		if(request.getParameter("tag") != null) {
 			tag = request.getParameter("tag");

@@ -161,4 +161,55 @@ public class HashtagDao {
 		}
 		return list;
 	}
+	
+	// -날짜별 검색 목록
+	public List<Map<String, Object>> selectSearchDateList(String cashDate) {
+		System.out.println("[HashtagDao.selectSearchDateList] cashDate : " + cashDate);
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		
+		// -데이터베이스 자원 준비
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			// -데이터베이스 드라이버 연결
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "java1234");
+
+			String sql = "SELECT c.cashbook_no, c.cash_date, c.kind, c.memo, c.update_date, c.create_date, t.tag"
+					+ " FROM hashtag t INNER JOIN cashbook c"
+					+ " ON t.cashbook_no = c.cashbook_no"
+					+ " WHERE c.cash_date = ?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, cashDate);
+				
+			
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("cashbookNo", rs.getInt("c.cashbook_no"));
+				map.put("cashDate", rs.getString("c.cash_date"));
+				map.put("kind", rs.getString("c.kind"));
+				map.put("memo", rs.getString("c.memo"));
+				map.put("updateDate", rs.getString("c.update_date"));
+				map.put("createDate", rs.getString("c.create_date"));
+				map.put("tag", rs.getString("t.tag"));
+				list.add(map);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// -데이터베이스 자원 반환
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }

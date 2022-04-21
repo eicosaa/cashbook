@@ -20,7 +20,10 @@
 	<a href = "<%= request.getContextPath() %>/SearchIncomeExpendListController?kind=<%= "수입" %>" class = "btn btn-outline-dark btn-sm">수입</a>
 	<a href = "<%= request.getContextPath() %>/SearchIncomeExpendListController?kind=<%= "지출" %>" class = "btn btn-outline-dark btn-sm">지출</a>
 	<div> 날짜별 검색 </div>
-	
+	<form method = "get" action = "<%= request.getContextPath() %>/SearchDateListController">
+		<input type = "date" name = "cashDate" class = "form-control">
+		<button type = "submit" class = "btn btn-outline-dark btn-sm">검색</button>
+	</form>
 	<a href = "<%= request.getContextPath() %>/TagController" class = "btn btn-outline-dark btn-sm">이전 페이지</a>
 	<table class = "table table-bordered">
 		<tr>
