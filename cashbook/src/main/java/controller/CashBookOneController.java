@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CashBookDao;
 import vo.CashBook;
@@ -14,6 +15,14 @@ import vo.CashBook;
 public class CashBookOneController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// -로그인 여부
+		HttpSession session = request.getSession();
+		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
+		if(sessionMemberId == null) {
+			// 로그인 되지 않은 경우
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
 		
 		// 1) 해당 링크 가계부 리스트 상세보기 요청 분석
 		int cashbookNo = Integer.parseInt(request.getParameter("cashbookNo"));

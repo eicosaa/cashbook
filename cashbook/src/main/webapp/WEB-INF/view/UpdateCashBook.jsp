@@ -8,6 +8,10 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
+	<div>
+		<%= session.getAttribute("sessionMemberId") %>님 반갑습니다.
+		<a href = "<%= request.getContextPath() %>/LogoutController">로그아웃</a>
+	</div>
 <div class="container">
 <br>
 	<h2>

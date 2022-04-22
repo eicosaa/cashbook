@@ -11,6 +11,10 @@
 <%
 	List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute("list");
 %>
+	<div>
+		<%= session.getAttribute("sessionMemberId") %>님 반갑습니다.
+		<a href = "<%= request.getContextPath() %>/LogoutController">로그아웃</a>
+	</div>
 <div class="container">
 <br>
 	<h2>
