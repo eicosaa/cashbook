@@ -37,6 +37,7 @@
 	<div>
 		<%= session.getAttribute("sessionMemberId") %>님 반갑습니다.
 		<a href = "<%= request.getContextPath() %>/LogoutController">로그아웃</a>
+		<a href = "<%= request.getContextPath() %>/SelectMemberOneController?memberId=<%= session.getAttribute("sessionMemberId") %>" class = "btn btn-outline-secondary">회원 정보</a>
 	</div>
 	<div>
 		<a href = "<%= request.getContextPath() %>/TagController">tags</a>

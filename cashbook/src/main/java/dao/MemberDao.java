@@ -56,7 +56,42 @@ public class MemberDao {
 	// 회원 탈퇴 (DELETE)
 	
 	// 회원 정보 (SELECT)
-	
+	public Member selectMemberOne(String sessionMemberId) {
+		Member member = new Member();
+		
+		// -데이터베이스 자원 준비
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT member_id memberId, create_date createDate FROM member WHERE member_id = ?";
+		
+		try {
+			// -데이터베이스 드라이버 연결
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "java1234");
+			
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, sessionMemberId);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				member.setMemberId(rs.getString("memberId"));
+				member.setCreateDate(rs.getString("createDate"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// -데이터베이스 자원 반환
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+				
+		return member;
+	}
 	// 로그인
 	public String selectMemberByIdPw(Member member) {
 		String memberId = null;
