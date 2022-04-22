@@ -23,8 +23,48 @@
 				<td>PW</td>
 				<td><input type = "password" name = "memberPw" class = "form-control"></td>
 			</tr>
+			<tr>
+				<td>Name</td>
+				<td><input type = "text" name = "memberName" class = "form-control"></td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td>
+					<input type = "radio" name = "memberGender" value = "여성" class = "form-radio-input">여성 &nbsp;
+					<input type = "radio" name = "memberGender" value = "남성" class = "form-radio-input">남성
+				</td>
+			</tr>
+			<tr>
+				<td>Phone</td>
+				<td><input type = "number" name = "memberPhone1" class = "form-control"> -
+					<input type = "number" name = "memberPhone2" class = "form-control"> -
+					<input type = "number" name = "memberPhone3" class = "form-control"></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>
+					<input type = "text" name = "memberEmail1" class = "form-control"> @
+					<select name = "memberEmail2">
+						<option value = "email.com">email.com</option>
+						<option value = "gmail.com">gmail.com</option>
+						<option value = "naver.com">naver.com</option>
+						<option value = "hanmail.com">hanmail.com</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Birth</td>
+				<td><input type = "text" name = "memberBirth" class = "form-control"></td>
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td><input type = "text" name = "memberAddr" class = "form-control"></td>
+			</tr>
 		</table>
-		<button type = "submit" class = "btn btn-outline-secondary">회원가입</button>
+		<div>
+			<button type = "submit" class = "btn btn-outline-secondary">회원가입</button>
+			<a href = "<%= request.getContextPath() %>/CashBookListByMonthController" class = "btn btn-outline-secondary">이전 페이지</a>
+		</div>
 	</form>
 </div>
 </body>

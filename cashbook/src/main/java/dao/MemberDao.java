@@ -24,12 +24,18 @@ public class MemberDao {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "java1234");
 			
-			String sql = "INSERT INTO member(member_id, member_pw, create_date) "
-					   + "VALUES (?, PASSWORD(?), NOW())";
+			String sql = "INSERT INTO member(member_id, member_pw, member_name, member_phone, member_gender, member_email, member_birth, member_addr, create_date) "
+					   + "VALUES (?, PASSWORD(?), ?, ?, ?, ?, ?, ?, NOW())";
 			
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, member.getMemberId());
 			stmt.setString(2, member.getMemberPw());
+			stmt.setString(3, member.getMemberName());
+			stmt.setString(4, member.getMemberPhone());
+			stmt.setString(5, member.getMemberGender());
+			stmt.setString(6, member.getMemberEmail());
+			stmt.setString(7, member.getMemberBirth());
+			stmt.setString(8, member.getMemberAddr());
 			row = stmt.executeUpdate();	
 			
 		} catch (Exception e) {
