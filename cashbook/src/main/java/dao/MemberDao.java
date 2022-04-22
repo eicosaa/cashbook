@@ -70,7 +70,7 @@ public class MemberDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT member_id memberId, create_date createDate FROM member WHERE member_id = ?";
+		String sql = "SELECT member_id memberId, member_name memberName, member_phone memberPhone, member_gender memberGender, member_email memberEmail, member_birth memberBirth, member_addr memberAddr, create_date createDate FROM member WHERE member_id = ?";
 		
 		try {
 			// -데이터베이스 드라이버 연결
@@ -82,9 +82,15 @@ public class MemberDao {
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				member.setMemberId(rs.getString("memberId"));
+				member.setMemberName(rs.getString("memberName"));
+				member.setMemberPhone(rs.getString("memberPhone"));
+				member.setMemberGender(rs.getString("memberGender"));
+				member.setMemberEmail(rs.getString("memberEmail"));
+				member.setMemberBirth(rs.getString("memberBirth"));
+				member.setMemberAddr(rs.getString("memberAddr"));
 				member.setCreateDate(rs.getString("createDate"));
 			}
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

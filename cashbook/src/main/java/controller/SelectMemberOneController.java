@@ -42,6 +42,12 @@ public class SelectMemberOneController extends HttpServlet {
 		
 		// -해당 링크 상세보기 출력에 필요한 모델값
 		request.setAttribute("memberId", member.getMemberId());
+		request.setAttribute("memberName", member.getMemberName());
+		request.setAttribute("memberGender", member.getMemberGender());
+		request.setAttribute("memberPhone", member.getMemberPhone());
+		request.setAttribute("memberBirth", member.getMemberBirth());
+		request.setAttribute("memberEmail", member.getMemberEmail());
+		request.setAttribute("memberAddr", member.getMemberAddr());
 		request.setAttribute("createDate", member.getCreateDate());
 		
 		// 3) 뷰 forward

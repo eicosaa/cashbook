@@ -23,8 +23,28 @@
 			<td><%= request.getAttribute("memberId") %></td>
 		</tr>
 		<tr>
-			<td>memberPw</td>
-			<td>****</td>
+			<td>memberName</td>
+			<td><%= request.getAttribute("memberName") %></td>
+		</tr>
+		<tr>
+			<td>memberGender</td>
+			<td><%= request.getAttribute("memberGender") %></td>
+		</tr>
+		<tr>
+			<td>memberPhone</td>
+			<td><%= request.getAttribute("memberPhone") %></td>
+		</tr>
+		<tr>
+			<td>memberBirth</td>
+			<td><%= request.getAttribute("memberBirth") %></td>
+		</tr>
+		<tr>
+			<td>memberEmail</td>
+			<td><%= request.getAttribute("memberEmail") %></td>
+		</tr>
+		<tr>
+			<td>memberAddr</td>
+			<td><%= request.getAttribute("memberAddr") %></td>
 		</tr>
 		<tr>
 			<td>createDate</td>
