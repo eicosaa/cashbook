@@ -58,6 +58,14 @@ public class MemberDao {
 	}
 	
 	// 회원 수정 (UPDATE)
+	public Member updateMember(String memberId) {
+		Member member = new Member();
+		/*
+		 	UPDATE member SET member_name = ?, member_phone = ?, member_gender = ?, member_email = ?, member_birth = ?, member_addr = ? memeber_pw = PASSWORD(?)
+			WHERE member_id = ? AND member_pw = PASSWORD(?)
+		*/
+		return member;
+	}
 	
 	// 회원 탈퇴 (DELETE)
 	
