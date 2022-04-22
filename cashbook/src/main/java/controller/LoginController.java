@@ -16,6 +16,7 @@ public class LoginController extends HttpServlet {
 	
 	// 로그인 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// -로그인 유/무에 따라 접근 허가
 		HttpSession session = request.getSession();
 		String sessionMemberId = (String)session.getAttribute("sessionMemberId");
 		if(sessionMemberId != null) {
