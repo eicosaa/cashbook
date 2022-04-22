@@ -19,6 +19,7 @@
 			</tr>
 		</table>
 		<button type = "submit">로그인</button>
+		<a href = "<%= request.getContextPath() %>/InsertMemberController">회원가입</a>
 	</form>
 </body>
 </html>
