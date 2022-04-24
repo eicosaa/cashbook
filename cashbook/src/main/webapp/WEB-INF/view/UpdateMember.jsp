@@ -17,11 +17,11 @@
 		<div class="container p-3 my-3 bg-secondary text-white text-center">회원정보 수정</div>
 	</h2>
 	
-	<form method = "post" action = "<%= request.getContextPath() %>/InsertMemberController">
+	<form method = "post" action = "<%= request.getContextPath() %>/UpdateMemberController">
 	<table class = "table table-bordered">
 		<tr>
 			<td>ID</td>
-			<td><input type = "text" name = "memberId" class = "form-control"></td>
+			<td><input type = "text" name = "memberId" class = "form-control" value = "<%= session.getAttribute("sessionMemberId") %>" readonly = "readonly"></td>
 		</tr>
 		<tr>
 			<td>PW</td>
@@ -52,7 +52,7 @@
 					<option value = "email.com">email.com</option>
 					<option value = "gmail.com">gmail.com</option>
 					<option value = "naver.com">naver.com</option>
-					<option value = "hanmail.com">hanmail.com</option>
+					<option value = "hanmail.com">hanmail.net</option>
 				</select>
 			</td>
 		</tr>
@@ -63,6 +63,10 @@
 		<tr>
 			<td>Address</td>
 			<td><input type = "text" name = "memberAddr" class = "form-control"></td>
+		</tr>
+		<tr>
+			<td>비밀번호 확인</td>
+			<td><input type = "password" name = "originalMemberPw" class = "form-control"></td>
 		</tr>
 	</table>
 	<button type = "submit" class = "btn btn-outline-secondary">회원 정보 수정</button>

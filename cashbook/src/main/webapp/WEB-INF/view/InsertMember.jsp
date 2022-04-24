@@ -48,7 +48,7 @@
 						<option value = "email.com">email.com</option>
 						<option value = "gmail.com">gmail.com</option>
 						<option value = "naver.com">naver.com</option>
-						<option value = "hanmail.com">hanmail.com</option>
+						<option value = "hanmail.com">hanmail.net</option>
 					</select>
 				</td>
 			</tr>

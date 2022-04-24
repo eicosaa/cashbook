@@ -71,14 +71,14 @@ public class InsertMemberController extends HttpServlet {
 		String memberEmail = memberEmail1 + "@" + memberEmail2;
 		member.setMemberEmail(memberEmail);
 		
-		System.out.println("[InsertMemberController.doGet()] memberId : " + memberId);
-		System.out.println("[InsertMemberController.doGet()] memberPw : " + memberPw);
-		System.out.println("[InsertMemberController.doGet()] memberName : " + memberName);
-		System.out.println("[InsertMemberController.doGet()] memberGender : " + memberGender);
-		System.out.println("[InsertMemberController.doGet()] memberPhone : " + memberPhone);
-		System.out.println("[InsertMemberController.doGet()] memberBirth : " + memberBirth);
-		System.out.println("[InsertMemberController.doGet()] memberEmail : " + memberEmail);
-		System.out.println("[InsertMemberController.doGet()] memberAddr : " + memberAddr);
+		System.out.println("[InsertMemberController.doPost()] memberId : " + memberId);
+		System.out.println("[InsertMemberController.doPost()] memberPw : " + memberPw);
+		System.out.println("[InsertMemberController.doPost()] memberName : " + memberName);
+		System.out.println("[InsertMemberController.doPost()] memberGender : " + memberGender);
+		System.out.println("[InsertMemberController.doPost()] memberPhone : " + memberPhone);
+		System.out.println("[InsertMemberController.doPost()] memberBirth : " + memberBirth);
+		System.out.println("[InsertMemberController.doPost()] memberEmail : " + memberEmail);
+		System.out.println("[InsertMemberController.doPost()] memberAddr : " + memberAddr);
 		
 		// -모델값(회원 가입 정보)을 반환하는 비즈니스 로직(모델) 호출
 		MemberDao memberDao = new MemberDao();
