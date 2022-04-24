@@ -108,6 +108,43 @@ public class MemberDao {
 	}
 	
 	// 회원 탈퇴 (DELETE)
+	public void deleteMember(String memberId, String memberPw) {
+		// -데이터베이스 자원 준비
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int row = 0;
+		
+		try {
+			// -데이터베이스 드라이버 연결
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "java1234");
+
+			String sql = "DELETE FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
+			
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			stmt.setString(2, memberPw);
+			row = stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// -데이터베이스 자원 반환
+				conn.close();
+				
+				// -디버깅 코드
+				if(row == 1) {
+					System.out.println("[deleteMember] Member 삭제 성공");
+				} else {
+					System.out.println("[deleteMember] Member 삭제 실패");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	// 회원 정보 (SELECT)
 	public Member selectMemberOne(String sessionMemberId) {

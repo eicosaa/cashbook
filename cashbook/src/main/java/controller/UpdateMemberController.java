@@ -21,7 +21,7 @@ public class UpdateMemberController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8"); // 인코딩
 		
-		// -회원 가입 정보 요청 분석
+		// -회원 정보 요청 분석
 		String memberId = null;
 		String memberPw = null;
 		String memberName = null;
