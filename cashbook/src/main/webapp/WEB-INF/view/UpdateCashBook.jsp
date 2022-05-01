@@ -17,7 +17,7 @@
 	<h2>
 		<div class="container p-3 my-3 bg-secondary text-white text-center">UpdateCashBook</div>
 	</h2>
-	<form method = "post" action = "<%= request.getContextPath() %>/InsertCashBookController">
+	<form method = "post" action = "<%= request.getContextPath() %>/UpdateCashBookController">
 	<table class = "table table-bordered">
 			<tr>
 				<td>Date</td>
@@ -26,18 +26,18 @@
 			<tr>
 				<td>kind</td>
 				<td>
-					<input type = "radio" name = "kind" value = "수입" class = "form-radio-input">수입 &nbsp;
-					<input type = "radio" name = "kind" value = "지출" class = "form-radio-input">지출
+					<input type = "radio" name = "kind" value = "수입" class = "form-radio-input" <% if(request.getAttribute("kind").equals("수입")) { %> checked = "checked" <% } %> >수입 &nbsp;
+					<input type = "radio" name = "kind" value = "지출" class = "form-radio-input" <% if(request.getAttribute("kind").equals("지출")) { %> checked = "checked" <% } %> >지출
 				</td>
 			</tr>
 			<tr>
 				<td>cash</td>
-				<td><input type = "number" name = "cash" value = "<%= (String)request.getAttribute("cash") %>" class = "form-control"></td>
+				<td><input type = "number" name = "cash" value = "<%= request.getAttribute("cash") %>" class = "form-control"></td>
 			</tr>
 			<tr>
 				<td>memo</td>
 				<td>
-					<textarea rows="4" cols="50" name = "memo" value = "<%= (String)request.getAttribute("memo") %>" class = "form-control"></textarea>
+					<textarea rows="4" cols="50" name = "memo" placeholder = "<%= request.getAttribute("memo") %>" class = "form-control"></textarea>
 				</td>
 			</tr>
 		</table>

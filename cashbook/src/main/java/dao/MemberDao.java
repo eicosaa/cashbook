@@ -15,7 +15,6 @@ public class MemberDao {
 	
 	// 회원 가입 (INSERT)
 	public void insertMember(Member member) {
-		
 		// -데이터베이스 자원 준비
 		Connection conn = null;
 		PreparedStatement stmt = null;

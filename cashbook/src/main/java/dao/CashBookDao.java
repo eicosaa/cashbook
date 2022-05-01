@@ -73,6 +73,71 @@ public class CashBookDao {
 		}
 	}
 	
+	// -수정
+	public void updateCashBook(CashBook cashbook, List<String> hashtag) {
+		// -데이터베이스 자원 준비
+		Connection conn = null;
+		PreparedStatement updateCashbookStmt = null;
+		PreparedStatement deleteHashtagStmt = null;
+		PreparedStatement insertHashtagStmt = null;
+		String deleteHashtagSql = "DELETE FROM hashtag WHERE cashbook_no = ?"; // -hashtag 테이블 데이터를 삭제하는 sql
+		String updateCashbookSql = "UPDATE cashbook SET cash_date = ?, kind = ?, cash = ?, memo = ?, update_date = NOW() WHERE cashbook_no = ?"; // -cashbook 테이블 데이터를 수정하는 sql
+		String insertHashtagSql = "INSERT INTO hashtag(cashbook_no, tag, create_date) VALUES(?, ?, NOW())"; // -hashtag 테이블 데이터를 입력하는 sql
+		int row = 0;
+		
+		try {
+			// -데이터베이스 드라이버 연결
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "java1234");
+			conn.setAutoCommit(false); // 자동 커밋을 해제
+			
+			// -hashtag 테이블 데이터 삭제
+			deleteHashtagStmt = conn.prepareStatement(deleteHashtagSql);
+			deleteHashtagStmt.setInt(1, cashbook.getCashbookNo());
+			deleteHashtagStmt.executeUpdate();
+			
+			// -cashbook 테이블 데이터 수정
+			updateCashbookStmt = conn.prepareStatement(updateCashbookSql);
+			updateCashbookStmt.setString(1, cashbook.getCashDate());
+			updateCashbookStmt.setString(2, cashbook.getKind());
+			updateCashbookStmt.setInt(3, cashbook.getCash());
+			updateCashbookStmt.setString(4, cashbook.getMemo());
+			updateCashbookStmt.setInt(5, cashbook.getCashbookNo());
+			row = updateCashbookStmt.executeUpdate();
+			
+			// -hashtag 테이블 데이터 입력
+			for(String h : hashtag) {
+				insertHashtagStmt = conn.prepareStatement(insertHashtagSql);
+				insertHashtagStmt.setInt(1, cashbook.getCashbookNo());
+				insertHashtagStmt.setString(2, h);
+				insertHashtagStmt.executeUpdate();
+			}
+			
+			conn.commit(); // -커밋			
+		} catch (Exception e) {
+			try { 
+				conn.rollback(); // -예외가 발생하면 rollback 시킨다.
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} 
+			e.printStackTrace();
+		} finally {
+			try {
+				// -데이터베이스 자원 반환
+				conn.close();
+				
+				// -디버깅 코드
+				if(row == 1) {
+					System.out.println("[updateCashBook] 글 수정 성공");
+				} else {
+					System.out.println("[updateCashBook] 글 수정 실패");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+	}
+	
 	// -삭제
 	public void deleteCashBook(int cashbookNo) {
 		// -데이터베이스 자원 준비
